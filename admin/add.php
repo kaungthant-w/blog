@@ -26,7 +26,7 @@ if($_POST) {
         );
 
         if($result) {
-            echo "<script>alert('Successfully added.')</script>";
+            echo "<script>alert('Successfully added.');window.location.href='index.php';</script>";
         }
     }
 }
