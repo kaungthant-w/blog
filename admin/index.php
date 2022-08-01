@@ -18,18 +18,19 @@ include "header.php";
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <a href="add.php" class="btn btn-success">New Blog Post</a>
+                <h3 class="card-title">Blog Listing</h3>
               </div>
-
+              
               <?php
                 $stmt = $pdo -> prepare("SELECT * FROM posts ORDER BY id DESC");
                 $stmt -> execute();
                 $result = $stmt -> fetchAll();
-
+                
                 // print_r($result);
-              ?>
+                ?>
               <!-- /.card-header -->
               <div class="card-body">
+                <a href="add.php" class="btn btn-success mb-3">New Blog Post</a>
                 <table class="table table-bordered">
                   <thead>
                     <tr>
