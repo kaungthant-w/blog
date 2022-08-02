@@ -1,12 +1,12 @@
 <?php
 session_start();
-require("../config/config.php");
+require("config/config.php");
 
 if(empty($_SESSION["user_id"]) && empty($_SESSION['logged_in'])) {
-  header("Location:login.php");
+  header("Location:admin/login.php");
 }
 
-include "header.php";
+include "admin/header.php";
 
 ?>
 
@@ -138,5 +138,5 @@ include "header.php";
   </aside>
   <!-- /.control-sidebar -->
 <?php
-include "footer.php";
+include "admin/footer.php";
 ?>

@@ -25,16 +25,16 @@
     </ul>
 
     <!-- SidebarSearch Form -->
-    <li class="form-inline ml-3">
+    <form action="index.php" method="post" class="form-inline ml-3">
       <div class="input-group input-group-sm" >
-        <input class="form-control form-control-navbar" type="search" placeholder="Search">
+        <input name="search" class="form-control form-control-navbar" type="search" placeholder="Search">
         <div class="input-group-append">
           <button class="btn btn-sidebar btn-default" type="submit">
             <i class="fas fa-search"></i>
           </button>
         </div>
       </div>
-    </li>
+    </form>
 
   </nav>
   <!-- /.navbar -->
