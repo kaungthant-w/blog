@@ -1,3 +1,39 @@
+<?php
+session_start();
+require "config/config.php";
+
+if(empty($_SESSION["user_id"]) && empty($_SESSION['logged_in']))  {
+  header("Location:login.php");
+}
+
+// echo $_SESSION["user_id"];
+// exit();
+
+$blogId = $_GET["id"];
+$stmt = $pdo -> prepare("SELECT * FROM posts WHERE id=$blogId");
+$stmt -> execute();
+$result = $stmt -> fetchAll();
+// echo $result[0]["title"];
+
+$authorId = $result[0]["author_id"];
+$stmtau = $pdo -> prepare("SELECT * FROM users WHERE id=$authorId");
+$stmtau -> execute();
+$auResult = $stmtau -> fetchAll();
+
+if($_POST) {
+  $comment = $_POST["comment"];
+  $stmt = $pdo -> prepare("INSERT INTO comments(content, author_id, post_id)VALUES(:content, :author_id, :post_id)");
+
+  $result = $stmt -> execute(
+    array(":content" => $comment, ":author_id" => $_SESSION['user_id'], ":post_id" => $blogId)
+);
+if ($result) {
+    header("Location:blogDetail.php?id=".$blogId);
+}
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,43 +60,29 @@
     <div class="row">
       <div class="col-md-12">
         <!-- Box Comment -->
-        <div class="card card-widget">
+        <div class="card">
           <div class="card-header text-center">
-            <h4>Blog Title</h4>
+            <h4><?php echo $result[0]["title"]; ?></h4>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <img class="img-thumbnail w-100" src="dist/img/photo2.png" alt="Photo">
+            <!-- <img class="img-thumbnail w-100 mb-4" src="dist/img/photo2.png" alt="Photo"> -->
+            <img class="img-thumbnail w-100 h-50 d-block m-auto" style="height: 400px;" src="admin/images/<?php echo $result[0]['image']; ?>" alt="blog">
+            <?php echo $result[0]["content"]; ?>
+          </div>
 
-            <p>I took this photo this morning. What do you guys think?</p>
-            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</button>
-            <button type="button" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
-            <span class="float-right text-muted">127 likes - 3 comments</span>
+          <h3 class="ml-4">Comments</h3><hr>
+          <div class="mx-3 mb-3">
+          <a href="index.php" type='button' class="btn btn-default">Go Back</a>
           </div>
           <!-- /.card-body -->
           <div class="card-footer card-comments">
-            <div class="card-comment">
-              <!-- User image -->
-              <img class="img-circle img-sm" src="dist/img/user3-128x128.jpg" alt="User Image">
-
-              <div class="comment-text">
-                <span class="username">
-                  Maria Gonzales
-                  <span class="text-muted float-right">8:03 PM Today</span>
-                </span><!-- /.username -->
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
-              </div>
-              <!-- /.comment-text -->
-            </div>
             <!-- /.card-comment -->
             <div class="card-comment">
               <!-- User image -->
-              <img class="img-circle img-sm" src="dist/img/user4-128x128.jpg" alt="User Image">
-
-              <div class="comment-text">
+              <div class="">
                 <span class="username">
-                  Luna Stark
+                  <?php echo $auResult[0]["name"] ; ?>
                   <span class="text-muted float-right">8:03 PM Today</span>
                 </span><!-- /.username -->
                 It is a long established fact that a reader will be distracted
@@ -72,11 +94,10 @@
           </div>
           <!-- /.card-footer -->
           <div class="card-footer">
-            <form action="#" method="post">
-              <img class="img-fluid img-circle img-sm" src="dist/img/user4-128x128.jpg" alt="Alt Text">
+            <form action="" method="post">
               <!-- .img-push is used to add margin to elements next to floating images -->
               <div class="img-push">
-                <input type="text" class="form-control form-control-sm" placeholder="Press enter to post comment">
+                <input type="text" name="comment" class="form-control form-control-sm" placeholder="Press enter to post comment">
               </div>
             </form>
           </div>
@@ -93,17 +114,14 @@
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="py-4 px-3 font-weight clearfix">
+  <footer class="p-2">
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 3.2.0
     </div>
-    <div class="float-left ml-0">
-      <strong >Copyright &copy; 2022 <a href="#">Aprogrammer</a>.</strong> All rights reserved.
-    </div>
-    
+    <strong>Copyright &copy; 2022 <a href="#">Aprogrammer</a>.</strong> All rights reserved.
   </footer>
+
 </div>
-<!-- ./wrapper -->
 
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>

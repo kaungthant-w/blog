@@ -1,3 +1,11 @@
+<?php
+session_start();
+require "config/config.php";
+
+if(empty($_SESSION["user_id"]) && empty($_SESSION['logged_in']))  {
+  header("Location:login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,71 +37,41 @@
       </div><!-- /.container-fluid -->
     </section>
 
+    <?php
+      $stmt = $pdo -> prepare("SELECT * FROM posts ORDER BY id DESC");
+      $stmt -> execute();
+      $rawResult = $stmt -> fetchAll();
+
+    ?>
+
     <!-- Main content -->
     <section class="content">
-    <div class="row">
-          <div class="col-md-4">
-            <!-- Box Comment -->
-            <div class="card card-widget">
-              <div class="card-header">
-                <div class="user-title">
-                  <h4 class="text-center">Blog Title</h4>
+      <div class="row">
+        <?php
+          if ($rawResult) {
+            $i = 1;
+            foreach($rawResult as $value ) { ?>
+              <div class="col-md-4">
+                <!-- Box Comment -->
+                <div class="card card-widget">
+                  <div class="card-header">
+                    <div class="user-title">
+                      <h4 class="text-center"><?php echo $value['title']; ?></h4>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <a href="blogDetail.php?id=<?php echo $value['id']; ?>"><img class="img-thumbnail w-100" style="height: 400px;" src="admin/images/<?php echo $value['image'] ?>" alt="blog"></a>
+                  </div>
                 </div>
+                <!-- /.card -->
               </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <img class="img-fluid pad" src="dist/img/photo2.png" alt="Photo">
-              </div>
-            </div>
-            <!-- /.card -->
-          </div>
-          <div class="col-md-4">
-            <!-- Box Comment -->
-            <div class="card card-widget">
-              <div class="card-header">
-                <div class="user-title">
-                  <h4 class="text-center">Blog Title</h4>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <img class="img-fluid pad" src="dist/img/photo2.png" alt="Photo">
-              </div>
-            </div>
-            <!-- /.card -->
-          </div>
-          <div class="col-md-4">
-            <!-- Box Comment -->
-            <div class="card card-widget">
-              <div class="card-header">
-                <div class="user-title">
-                  <h4 class="text-center">Blog Title</h4>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <img class="img-fluid pad" src="dist/img/photo2.png" alt="Photo">
-              </div>
-            </div>
-            <!-- /.card -->
-          </div>
-          <div class="col-md-4">
-            <!-- Box Comment -->
-            <div class="card card-widget">
-              <div class="card-header">
-                <div class="user-title">
-                  <h4 class="text-center">Blog Title</h4>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <img class="img-fluid pad" src="dist/img/photo2.png" alt="Photo">
-              </div>
-            </div>
-            <!-- /.card -->
-          </div>
-
-        </div>
+          <?php
+          $i++;
+            }
+          }
+        ?>
+      </div>
     </section>
     <!-- /.content -->
 
@@ -105,9 +83,9 @@
 
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.2.0
+      <a href="logout.php" class="btn btn-default">Logout</a>
     </div>
-    <strong>Copyright &copy; 2022 <a href="https://adminlte.io">Aprogrammer</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2022 <a href="#">Aprogrammer</a>.</strong> All rights reserved.
   </footer>
 
 </div>
