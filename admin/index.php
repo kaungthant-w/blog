@@ -29,7 +29,7 @@ include "header.php";
                   $pageno = 1;
                 }
 
-                $numOfrecs = 1;
+                $numOfrecs = 3;
                 $offset = ($pageno - 1) * $numOfrecs;
 
                 if(empty($_POST['search'])) {
@@ -45,14 +45,14 @@ include "header.php";
                 }else{
                   
                   $searchKey = $_POST['search'];
-                  $stmt = $pdo -> prepare("SELECT * FROM posts WHERE title LIKE '%searchKey%'  ORDER BY id DESC");
+                  $stmt = $pdo -> prepare("SELECT * FROM posts WHERE title LIKE '%$searchKey%' ORDER BY id DESC");
                   // print_r($stmt);exit();
                   $stmt -> execute();
                   $rawResult = $stmt -> fetchAll();
 
                   $total_pages = ceil(count($rawResult) / $numOfrecs);
 
-                  $stmt = $pdo -> prepare("SELECT * FROM posts WHERE title LIKE '%searchKey%' ORDER BY id DESC LIMIT $offset,$numOfrecs");
+                  $stmt = $pdo -> prepare("SELECT * FROM posts WHERE title LIKE '%$searchKey%' ORDER BY id DESC LIMIT $offset,$numOfrecs");
                   $stmt -> execute();
                   $result = $stmt -> fetchAll();
                 }
