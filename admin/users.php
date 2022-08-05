@@ -37,8 +37,7 @@ if($user) {
     );
 
     if($result) {
-        // echo "<script>alert('Successfully Admin added.');window.location.href='users.php';</script>";
-        echo $role;
+        echo "<script>alert('Successfully Admin added.');window.location.href='users.php';</script>";
     }
 }
 }
