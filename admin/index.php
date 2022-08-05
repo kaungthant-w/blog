@@ -58,7 +58,8 @@ include "header.php";
                 }
 
                 
-                ?>
+              ?>
+              
               <!-- /.card-header -->
               <div class="card-body">
                 <a href="add.php" class="btn btn-success mb-3">New Blog Post</a>

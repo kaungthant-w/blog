@@ -72,6 +72,12 @@
                 Blogs
               </p>
             </a>
+            <a href="users.php" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Users
+              </p>
+            </a>
           </li>
         </ul>
       </nav>
