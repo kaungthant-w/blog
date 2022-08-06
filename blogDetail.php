@@ -9,16 +9,31 @@ if(empty($_SESSION["user_id"]) && empty($_SESSION['logged_in']))  {
 // echo $_SESSION["user_id"];
 // exit();
 
-$blogId = $_GET["id"];
-$stmt = $pdo -> prepare("SELECT * FROM posts WHERE id=$blogId");
+$stmt = $pdo -> prepare("SELECT * FROM posts WHERE id=".$_GET['id']);
 $stmt -> execute();
 $result = $stmt -> fetchAll();
 // echo $result[0]["title"];
 
-$authorId = $result[0]["author_id"];
-$stmtau = $pdo -> prepare("SELECT * FROM users WHERE id=$authorId");
-$stmtau -> execute();
-$auResult = $stmtau -> fetchAll();
+$blogId = $_GET["id"];
+$stmtmt = $pdo -> prepare("SELECT * FROM comments WHERE post_id=$blogId");
+$stmtmt -> execute();
+$cmResult = $stmtmt -> fetchAll();
+
+
+$auResult = [];
+if($cmResult) {
+
+  foreach($cmResult as $key => $value) {
+    $authorId = $cmResult[$key]["author_id"];
+    $stmtau = $pdo -> prepare("SELECT * FROM users WHERE id=$authorId");
+    $stmtau -> execute();
+    $auResult[] = $stmtau -> fetchAll();
+  }
+
+}
+
+// print_r($auResult[1]);
+
 
 if($_POST) {
   $comment = $_POST["comment"];
@@ -77,20 +92,22 @@ if ($result) {
           </div>
           <!-- /.card-body -->
           <div class="card-footer card-comments">
-            <!-- /.card-comment -->
             <div class="card-comment">
-              <!-- User image -->
-              <div class="">
-                <span class="username">
-                  <?php echo $auResult[0]["name"] ; ?>
-                  <span class="text-muted float-right">8:03 PM Today</span>
-                </span><!-- /.username -->
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
-              </div>
-              <!-- /.comment-text -->
+              <?php if($cmResult){?>
+                <div class="">
+                  <?php foreach($cmResult as $key => $value){ ?>
+                    <span class="username">
+                      <?php echo $auResult[0][0]["name"]; ?>
+                      <span class="text-muted float-right"><?php $value['created_at']; ?></span>
+                    </span>
+                    <?php echo $value['content']; ?>
+
+                    <?php
+                    }
+                    ?>
+                </div>
+              <?php } ?>
             </div>
-            <!-- /.card-comment -->
           </div>
           <!-- /.card-footer -->
           <div class="card-footer">
