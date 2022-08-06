@@ -24,8 +24,17 @@
       </li>
     </ul>
 
+    <!-- search form -->
+    <?php
+      $link = $_SERVER["PHP_SELF"];
+      // print_r($link);
+      $link_array = explode('/', $link);
+      // print_r($link_array);
+      $page = end($link_array);
+    ?>
+
     <!-- SidebarSearch Form -->
-    <form action="index.php" method="post" class="form-inline ml-3">
+    <form action="<?php echo $page =='index.php' ? 'index.php':'users.php'; ?>" method="post" class="form-inline ml-3">
       <div class="input-group input-group-sm" >
         <input name="search" class="form-control form-control-navbar" type="search" placeholder="Search">
         <div class="input-group-append">

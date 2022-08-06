@@ -44,49 +44,47 @@ if($user) {
 
 ?>
 
-
 <!-- Main content -->
 <div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                <h3 class="card-title">Add User</h3>
-                </div>
-
-                <!-- /.card-header -->
-                <div class="card-body w-50 mx-auto">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                    <label for="name">Username</label>
-                    <input type="text" name="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                    <label for="email">email</label>
-                    <input type="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                    <label for="password">password</label>
-                    <input type="password" name="password" class="form-control" required>
-                    </div>
-                    <div class="form-group form-check">
-                    <input type="checkbox" name="role" value="1" class="form-check-input">
-                    <label for="role">Permission for Admin</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add User</button>
-                    <button type="users.php" class="btn btn-warning">Back</button>
-                </form>
-
-                </div>
-                <!-- /.card-body -->
+  <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Add User</h3>
             </div>
-            <!-- /.card -->
+
+            <!-- /.card-header -->
+            <div class="card-body w-50 mx-auto">
+              <form action="" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="name">Username</label>
+                  <input type="text" name="name" class="form-control" required>
+                  </div>
+                <div class="form-group">
+                  <label for="email">email</label>
+                  <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="password">password</label>
+                  <input type="password" name="password" class="form-control" required>
+                </div>
+                <div class="form-group form-check">
+                  <input type="checkbox" name="role" value="1" class="form-check-input">
+                  <label for="role">Permission for Admin</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Add User</button>
+                <button type="users.php" class="btn btn-warning">Back</button>
+            </form>
             </div>
+              <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
         </div>
-        <!-- /.row -->
-    </div><!-- /.container-fluid -->
-    </div>
+      </div>
+      <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
 </div><!-- /.content -->
 
   <!-- /.content-wrapper -->
