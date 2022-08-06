@@ -59,9 +59,6 @@ $result = $stmt -> fetchAll();
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-              <?php
-                
-              ?>
               <!-- /.card-header -->
               <div class="card-body">
                   <form action="" method="post" enctype="multipart/form-data">
