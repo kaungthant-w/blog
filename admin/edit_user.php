@@ -6,6 +6,10 @@
     header("Location:login.php");
     }
 
+    if($_SESSION["role"] != 1) {
+      header("Location:login.php");
+    }
+
     if($_POST) {
         $id = $_POST["id"];
         $name = $_POST["name"];
@@ -53,28 +57,28 @@
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
-                  <form action="" method="post" enctype="multipart/form-data">
-                      <div class="form-group">
-                          <input type="hidden" name="id" value="<?php echo $result[0]['id']; ?>">
-                          <label for="name">name</label>
-                          <input type="text" name="name" id="name" class="form-control" value="<?php echo $result[0]["name"]; ?>">
-                      </div>
+                <form action="" method="post" enctype="multipart/form-data">
+                  <div class="form-group">
+                      <input type="hidden" name="id" value="<?php echo $result[0]['id']; ?>">
+                      <label for="name">name</label>
+                      <input type="text" name="name" id="name" class="form-control" value="<?php echo $result[0]["name"]; ?>">
+                  </div>
 
-                      <div class="form-group">
-                          <label for="email">email</label>
-                          <input type="email" name="email" id="email" class="form-control" value="<?php echo $result[0]['email']; ?>">
-                      </div>
+                  <div class="form-group">
+                      <label for="email">email</label>
+                      <input type="email" name="email" id="email" class="form-control" value="<?php echo $result[0]['email']; ?>">
+                  </div>
 
-                      <div class="form-group form-check">
-                          <input type="checkbox" name="role" class="form-check-input" id="role" value="1">
-                          <label for="role">Permission for admin</label>
-                      </div>
+                  <div class="form-group form-check">
+                      <input type="checkbox" name="role" class="form-check-input" id="role" value="1">
+                      <label for="role">Permission for admin</label>
+                  </div>
 
-                      <div class="form-group">
-                          <input type="submit" class="btn btn-success" name="" value="Submit">
-                          <a href="users.php" class="btn btn-warning">Back</a>
-                      </div>
-                  </form>
+                  <div class="form-group">
+                      <input type="submit" class="btn btn-success" name="" value="Submit">
+                      <a href="users.php" class="btn btn-warning">Back</a>
+                  </div>
+                </form>
                 
               </div>
             </div>

@@ -37,11 +37,6 @@ if(empty($_SESSION["user_id"]) && empty($_SESSION['logged_in']))  {
       </div><!-- /.container-fluid -->
     </section>
 
-    <?php
-      
-
-    ?>
-
     <!-- Main content -->
     <section class="content">
       <div class="row">

@@ -17,11 +17,12 @@ if($_POST) {
     if($user["password"] == $password) {
       $_SESSION["user_id"] = $user['id'];
       $_SESSION["username"] = $user['name'];
+      $_SESSION["role"] = 0;
       $_SESSION["logged_in"] = time();
       header('Location:index.php');
     }
   } else {
-    echo "<script>alert('Incorrect credentials')</script>";
+    echo "<script>alert('Incorrect Login!')</script>";
   }
 }
 
