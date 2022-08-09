@@ -55,7 +55,6 @@ if($_POST) {
     <div class="card">
       <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
-
         <form action="" method="post">
           <div class="input-group mb-3">
             <input type="text" name="name" class="form-control" placeholder="name">
@@ -81,28 +80,13 @@ if($_POST) {
               </div>
             </div>
           </div>
-<<<<<<< HEAD
-        </div>
-        <div class="row">
           <!-- /.col -->
           <div class="col">
             <button type="submit" class="btn btn-primary w-100 mb-2">register</button>
             <button class="btn btn-default w-100"><a href="login.php">Login</a></button>
-=======
-          <div class="row">
             <!-- /.col -->
-            <div class="col">
-              <button type="submit" class="btn btn-primary w-100 mb-2">register</button>
-              <button type="register.php" class="btn btn-default w-100">Login</button>
-            </div>
-            <!-- /.col -->
->>>>>>> 0c30c30db8d3326e452cb613a9b1ccc5986c093b
           </div>
         </form>
-
-        <!-- <p class="mb-0">
-          <a href="register.html" class="text-center">Register a new membership</a>
-        </p> -->
       </div>
       <!-- /.login-card-body -->
     </div>

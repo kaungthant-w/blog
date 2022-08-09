@@ -9,11 +9,6 @@
     if($_SESSION["role"] != 1) {
       header("Location:login.php");
     }
-<<<<<<< HEAD
-    
-=======
->>>>>>> 0c30c30db8d3326e452cb613a9b1ccc5986c093b
-
     if($_POST) {
         $id = $_POST["id"];
         $name = $_POST["name"];

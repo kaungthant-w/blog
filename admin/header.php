@@ -33,7 +33,6 @@
         $page = end($link_array);
       ?>
 
-<<<<<<< HEAD
     <!-- SidebarSearch Form -->
     <form action="<?php echo $page =='index.php' ? 'index.php':'users.php'; ?>" method="post" class="form-inline ml-3">
       <div class="input-group input-group-sm" >
@@ -42,17 +41,6 @@
           <button class="btn btn-sidebar btn-default" type="submit">
             <i class="fas fa-search"></i>
           </button>
-=======
-      <!-- SidebarSearch Form -->
-      <form action="<?php echo $page =='index.php' ? 'index.php':'users.php'; ?>" method="post" class="form-inline ml-3">
-        <div class="input-group input-group-sm" >
-          <input type="search" name="search" class="form-control form-control-navbar" placeholder="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar btn-default" type="submit">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
->>>>>>> 0c30c30db8d3326e452cb613a9b1ccc5986c093b
         </div>
       </form>
 
@@ -62,7 +50,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="index.html" class="brand-link">
+      <a href="#" class="brand-link">
         <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Blog Panel</span>
       </a>
