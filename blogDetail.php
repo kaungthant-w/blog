@@ -22,14 +22,12 @@ $cmResult = $stmtmt -> fetchAll();
 
 $auResult = [];
 if($cmResult) {
-
   foreach($cmResult as $key => $value) {
     $authorId = $cmResult[$key]["author_id"];
     $stmtau = $pdo -> prepare("SELECT * FROM users WHERE id=$authorId");
     $stmtau -> execute();
     $auResult[] = $stmtau -> fetchAll();
   }
-
 }
 
 // print_r($auResult[1]);

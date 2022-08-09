@@ -17,6 +17,7 @@ if($_POST) {
     if($user["password"] == $password) {
       $_SESSION["user_id"] = $user['id'];
       $_SESSION["username"] = $user['name'];
+      $_SESSION["role"] = 0;
       $_SESSION["logged_in"] = time();
       header('Location:index.php');
     }
@@ -74,7 +75,7 @@ if($_POST) {
           <!-- /.col -->
           <div class="col">
             <button type="submit" class="btn btn-primary w-100 mb-2">Sign In</button>
-            <button type="register.php" class="btn btn-default w-100">register</button>
+            <button class="btn btn-default w-100"><a href="register.php">Register</a></button>
           </div>
           <!-- /.col -->
         </div>

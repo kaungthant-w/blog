@@ -17,9 +17,9 @@ if($_POST) {
     if($user) {
         echo "<script>alert('Email duplicated!')</script>";
     } else {
-        $stmt = $pdo -> prepare("INSERT INTO users(name, email, password)VALUES(:name, :email, :password)");
+        $stmt = $pdo -> prepare("INSERT INTO users(name, email, password, role)VALUES(:name, :email, :password, :role)");
         $result = $stmt -> execute(
-            array(":name" => $name, ":email" => $email, ":password" => $password)
+            array(":name" => $name, ":email" => $email, ":password" => $password, ":role" => 0)
         );
         if ($result) {
             echo "<script>alert('Successfully Register, Please login');window.location.href='login.php'</script>";
@@ -85,7 +85,7 @@ if($_POST) {
           <!-- /.col -->
           <div class="col">
             <button type="submit" class="btn btn-primary w-100 mb-2">register</button>
-            <button type="register.php" class="btn btn-default w-100">Login</button>
+            <button class="btn btn-default w-100"><a href="login.php">Login</a></button>
           </div>
           <!-- /.col -->
         </div>

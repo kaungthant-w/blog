@@ -6,6 +6,11 @@
     header("Location:login.php");
     }
 
+    if($_SESSION["role"] != 1) {
+      header("Location:login.php");
+    }
+    
+
     if($_POST) {
         $id = $_POST["id"];
         $name = $_POST["name"];
@@ -66,7 +71,7 @@
                       </div>
 
                       <div class="form-group form-check">
-                          <input type="checkbox" name="role" class="form-check-input" id="role" value="1">
+                          <input type="checkbox" name="role" class="form-check-input" id="role" value="1" <?php echo $result[0]["role"] ? "checked" : ""; ?>>
                           <label for="role">Permission for admin</label>
                       </div>
 

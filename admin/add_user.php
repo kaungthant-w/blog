@@ -6,6 +6,10 @@ if(empty($_SESSION["user_id"]) && empty($_SESSION['logged_in'])) {
   header("Location:login.php");
 }
 
+if($_SESSION["role"] != 1) {
+  header("Location:login.php");
+}
+
 include "header.php";
 
 if($_POST) {
@@ -15,10 +19,10 @@ if($_POST) {
   $password = $_POST["password"];
 
   
-  if(!empty($_POST["role"])) {
-    $role = 1;
-  } else {
+  if(empty($_POST["role"])) {
     $role = 0;
+  } else {
+    $role = 1;
   }
   
   $stmt = $pdo -> prepare("SELECT * FROM users WHERE email = :email");
@@ -70,11 +74,11 @@ if($user) {
                   <input type="password" name="password" class="form-control" required>
                 </div>
                 <div class="form-group form-check">
-                  <input type="checkbox" name="role" value="1" class="form-check-input">
+                  <input type="checkbox" name="role" value="1" class="form-check-input" checked>
                   <label for="role">Permission for Admin</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Add User</button>
-                <button type="users.php" class="btn btn-warning">Back</button>
+                <button class="btn"><a href="users.php" class="btn btn-warning">Back</a></button>
             </form>
             </div>
               <!-- /.card-body -->

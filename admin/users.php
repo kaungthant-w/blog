@@ -5,10 +5,21 @@ require("../config/config.php");
 if(empty($_SESSION["user_id"]) && empty($_SESSION['logged_in'])) {
   header("Location:login.php");
 }
+if($_SESSION["role"] != 1) {
+  header("Location:login.php");
+}
 
-include "header.php";
-
+if(isset($_POST["search"])) {
+  setcookie('search', $_POST['search'], time() + (86400 * 30), "/");
+} else {
+  if(empty($_GET["pageno"])) {
+    unset($_COOKIE["search"]);
+    setcookie('search', null, -1, '/');
+  }
+}
 ?>
+
+<?php include "header.php"; ?>
 <!-- Main content -->
 <div class="content">
 <div class="container-fluid">
@@ -30,7 +41,7 @@ include "header.php";
           $numOfrecs = 5;
           $offset = ($pageno - 1) * $numOfrecs;
 
-          if(empty($_POST['search'])) {
+          if(empty($_POST['search']) && empty($_COOKIE["search"])) {
             $stmt = $pdo -> prepare("SELECT * FROM users ORDER BY id DESC");
             $stmt -> execute();
             $rawResult = $stmt -> fetchAll();
@@ -42,7 +53,7 @@ include "header.php";
           
           }else{
             
-            $searchKey = $_POST['search'];
+            $searchKey = isset($_POST['search']) ? $_POST["search"] : $_COOKIE['search'];
             $stmt = $pdo -> prepare("SELECT * FROM users WHERE name LIKE '%$searchKey%' ORDER BY id DESC");
             // print_r($stmt);exit();
             $stmt -> execute();

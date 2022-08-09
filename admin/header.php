@@ -36,7 +36,7 @@
     <!-- SidebarSearch Form -->
     <form action="<?php echo $page =='index.php' ? 'index.php':'users.php'; ?>" method="post" class="form-inline ml-3">
       <div class="input-group input-group-sm" >
-        <input name="search" class="form-control form-control-navbar" type="search" placeholder="Search">
+        <input type="search" name="search" class="form-control form-control-navbar" placeholder="search">
         <div class="input-group-append">
           <button class="btn btn-sidebar btn-default" type="submit">
             <i class="fas fa-search"></i>
