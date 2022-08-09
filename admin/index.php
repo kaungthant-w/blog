@@ -18,102 +18,97 @@ if(isset($_POST["search"])) {
     setcookie('search', null, -1, '/');
   }
 }
-
-
 ?>
 
 <?php include "header.php"; ?>
   <!-- Main content -->
-  <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Blog Listing</h3>
-            </div>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Blog Listing</h3>
+          </div>
+
+          <?php
+            if(!empty($_GET['pageno'])) {
+              $pageno = $_GET['pageno'];
+            } else {
+              $pageno = 1;
+            }
+            $numOfrecs = 5;
+            $offset = ($pageno - 1) * $numOfrecs;
+            if(empty($_POST['search']) && empty($_COOKIE["search"])) {
+              $stmt = $pdo -> prepare("SELECT * FROM posts ORDER BY id DESC");
+              $stmt -> execute();
+              $rawResult = $stmt -> fetchAll();
+              $total_pages = ceil(count($rawResult) / $numOfrecs);
+
+              $stmt = $pdo -> prepare("SELECT * FROM posts ORDER BY id DESC LIMIT $offset,$numOfrecs");
+              $stmt -> execute();
+              $result = $stmt -> fetchAll();
             
-            <?php
-
-              if(!empty($_GET['pageno'])) {
-                $pageno = $_GET['pageno'];
-              } else {
-                $pageno = 1;
-              }
-
-              $numOfrecs = 5;
-              $offset = ($pageno - 1) * $numOfrecs;
-
-              if(empty($_POST['search']) && empty($_COOKIE["search"])) {
-                $stmt = $pdo -> prepare("SELECT * FROM posts ORDER BY id DESC");
-                $stmt -> execute();
-                $rawResult = $stmt -> fetchAll();
-                $total_pages = ceil(count($rawResult) / $numOfrecs);
-
-                $stmt = $pdo -> prepare("SELECT * FROM posts ORDER BY id DESC LIMIT $offset,$numOfrecs");
-                $stmt -> execute();
-                $result = $stmt -> fetchAll();
+            }else{
               
-              }else{
-                
-                $searchKey = isset($_POST['search']) ? $_POST["search"] : $_COOKIE['search'];
-                $stmt = $pdo -> prepare("SELECT * FROM posts WHERE title LIKE '%$searchKey%' ORDER BY id DESC");
-                // print_r($stmt);exit();
-                $stmt -> execute();
-                $rawResult = $stmt -> fetchAll();
+              $searchKey = isset($_POST['search']) ? $_POST["search"] : $_COOKIE['search'];
+              $stmt = $pdo -> prepare("SELECT * FROM posts WHERE title LIKE '%$searchKey%' ORDER BY id DESC");
+              // print_r($stmt);exit();
+              $stmt -> execute();
+              $rawResult = $stmt -> fetchAll();
 
-                $total_pages = ceil(count($rawResult) / $numOfrecs);
+              $total_pages = ceil(count($rawResult) / $numOfrecs);
 
-                $stmt = $pdo -> prepare("SELECT * FROM posts WHERE title LIKE '%$searchKey%' ORDER BY id DESC LIMIT $offset,$numOfrecs");
-                $stmt -> execute();
-                $result = $stmt -> fetchAll();
-              }
-        ?>
-        
-        <!-- /.card-header -->
-        <div class="card-body">
-          <a href="add.php" class="btn btn-success mb-3">New Blog Post</a>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th style="width: 10px">#</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th style="width: 40px">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-
-                if ($result) {
-
-                  $i = 1;
-                  foreach($result as $value ) { ?>
-
-              <tr>
-                <td><?php echo $i; ?></td>
-                <td><?php echo $value["title"]; ?></td>
-                <td>
-                <?php echo substr($value["content"],0,50); ?>
-                </td>
-                <td>
-                  <div class="btn-group">
-                    <a href="edit.php?id=<?php echo $value['id'] ?>" class="btn btn-warning">Edit</a>
-                    <a href="delete.php?id=<?php echo $value['id'] ?>"
-                    onclick="return confirm('Are you sure you want to delete this item')"
-                      class="btn btn-danger">Delete</a>
-                  </div>
-                </td>
-              </tr>
-
+              $stmt = $pdo -> prepare("SELECT * FROM posts WHERE title LIKE '%$searchKey%' ORDER BY id DESC LIMIT $offset,$numOfrecs");
+              $stmt -> execute();
+              $result = $stmt -> fetchAll();
+            }
+          ?>
+      
+          <!-- /.card-header -->
+          <div class="card-body">
+            <a href="add.php" class="btn btn-success mb-3">New Blog Post</a>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Title</th>
+                  <th>Content</th>
+                  <th style="width: 40px">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
                 <?php
-                $i++;
+
+                  if ($result) {
+
+                    $i = 1;
+                    foreach($result as $value ) { ?>
+
+                <tr>
+                  <td><?php echo $i; ?></td>
+                  <td><?php echo $value["title"]; ?></td>
+                  <td>
+                  <?php echo substr($value["content"],0,50); ?>
+                  </td>
+                  <td>
+                    <div class="btn-group">
+                      <a href="edit.php?id=<?php echo $value['id'] ?>" class="btn btn-warning">Edit</a>
+                      <a href="delete.php?id=<?php echo $value['id'] ?>"
+                      onclick="return confirm('Are you sure you want to delete this item')"
+                        class="btn btn-danger">Delete</a>
+                    </div>
+                  </td>
+                </tr>
+
+                  <?php
+                  $i++;
+                    }
                   }
-                }
-              ?>
-            </tbody>
-          </table>
-        </div>
+                ?>
+              </tbody>
+            </table>
+          </div>
         <!-- /.card-body -->
         <div class="card-footer clearfix">
           <ul class="pagination pagination-sm m-0 float-right">
@@ -129,24 +124,23 @@ if(isset($_POST["search"])) {
           </ul>
         </div>
       </div>
-      <!-- /.card -->
     </div>
   </div>
-  <!-- /.row -->
+<!-- /.row -->
   </div><!-- /.container-fluid -->
 </div>
 <!-- /.content -->
-<!-- /.content-wrapper -->
+</div>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-    <div class="p-3">
-      <h5>Title</h5>
-      <p>Sidebar content</p>
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+  <!-- Control sidebar content goes here -->
+  <div class="p-3">
+    <h5>Title</h5>
+    <p>Sidebar content</p>
+  </div>
+</aside>
+<!-- /.control-sidebar -->
 <?php
 include "footer.php";
 ?>
