@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'config/config.php';
 
 if($_POST) {
@@ -25,7 +26,6 @@ if($_POST) {
             echo "<script>alert('Successfully Register, Please login');window.location.href='login.php'</script>";
         }
     }
-
 }
 
 ?>
@@ -47,57 +47,66 @@ if($_POST) {
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="#" class="text-bold">Blog</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="#" class="text-bold">Blog</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="" method="post">
-      <div class="input-group mb-3">
-          <input type="text" name="name" class="form-control" placeholder="name">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
+        <form action="" method="post">
+          <div class="input-group mb-3">
+            <input type="text" name="name" class="form-control" placeholder="name">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="email" name="email" class="form-control" placeholder="Email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+          <div class="input-group mb-3">
+            <input type="email" name="email" class="form-control" placeholder="Email">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+          <div class="input-group mb-3">
+            <input type="password" name="password" class="form-control" placeholder="Password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
             </div>
           </div>
+<<<<<<< HEAD
         </div>
         <div class="row">
           <!-- /.col -->
           <div class="col">
             <button type="submit" class="btn btn-primary w-100 mb-2">register</button>
             <button class="btn btn-default w-100"><a href="login.php">Login</a></button>
+=======
+          <div class="row">
+            <!-- /.col -->
+            <div class="col">
+              <button type="submit" class="btn btn-primary w-100 mb-2">register</button>
+              <button type="register.php" class="btn btn-default w-100">Login</button>
+            </div>
+            <!-- /.col -->
+>>>>>>> 0c30c30db8d3326e452cb613a9b1ccc5986c093b
           </div>
-          <!-- /.col -->
-        </div>
-      </form>
+        </form>
 
-      <!-- <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
-      </p> -->
+        <!-- <p class="mb-0">
+          <a href="register.html" class="text-center">Register a new membership</a>
+        </p> -->
+      </div>
+      <!-- /.login-card-body -->
     </div>
-    <!-- /.login-card-body -->
   </div>
-</div>
 <!-- /.login-box -->
 
 <!-- jQuery -->

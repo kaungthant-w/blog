@@ -9,7 +9,10 @@
     if($_SESSION["role"] != 1) {
       header("Location:login.php");
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> 0c30c30db8d3326e452cb613a9b1ccc5986c093b
 
     if($_POST) {
         $id = $_POST["id"];
@@ -58,6 +61,7 @@
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
+<<<<<<< HEAD
                   <form action="" method="post" enctype="multipart/form-data">
                       <div class="form-group">
                           <input type="hidden" name="id" value="<?php echo $result[0]['id']; ?>">
@@ -80,6 +84,30 @@
                           <a href="users.php" class="btn btn-warning">Back</a>
                       </div>
                   </form>
+=======
+                <form action="" method="post" enctype="multipart/form-data">
+                  <div class="form-group">
+                      <input type="hidden" name="id" value="<?php echo $result[0]['id']; ?>">
+                      <label for="name">name</label>
+                      <input type="text" name="name" id="name" class="form-control" value="<?php echo $result[0]["name"]; ?>">
+                  </div>
+
+                  <div class="form-group">
+                      <label for="email">email</label>
+                      <input type="email" name="email" id="email" class="form-control" value="<?php echo $result[0]['email']; ?>">
+                  </div>
+
+                  <div class="form-group form-check">
+                      <input type="checkbox" name="role" class="form-check-input" id="role" value="1">
+                      <label for="role">Permission for admin</label>
+                  </div>
+
+                  <div class="form-group">
+                      <input type="submit" class="btn btn-success" name="" value="Submit">
+                      <a href="users.php" class="btn btn-warning">Back</a>
+                  </div>
+                </form>
+>>>>>>> 0c30c30db8d3326e452cb613a9b1ccc5986c093b
                 
               </div>
             </div>

@@ -9,8 +9,11 @@ if(empty($_SESSION["user_id"]) && empty($_SESSION['logged_in'])) {
 if($_SESSION["role"] != 1) {
   header("Location:login.php");
 }
+<<<<<<< HEAD
 
 include "header.php";
+=======
+>>>>>>> 0c30c30db8d3326e452cb613a9b1ccc5986c093b
 
 if($_POST) {
 
@@ -47,6 +50,9 @@ if($user) {
 }
 
 ?>
+
+
+<?php include "header.php"; ?>
 
 <!-- Main content -->
 <div class="content">

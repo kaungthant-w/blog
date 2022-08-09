@@ -34,6 +34,7 @@ if(empty($_SESSION["user_id"]) && empty($_SESSION['logged_in']))  {
               <h1>Blog Title</h1>
             </div>
           </div>
+<<<<<<< HEAD
         </div><!-- /.container-fluid -->
       </section>
       <!-- Main content -->
@@ -52,6 +53,28 @@ if(empty($_SESSION["user_id"]) && empty($_SESSION['logged_in']))  {
             $stmt -> execute();
             $rawResult = $stmt -> fetchAll();
             $total_pages = ceil(count($rawResult) / $numOfrecs);
+=======
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <?php
+          // pagination code start
+          if(!empty($_GET['pageno'])) {
+            $pageno = $_GET['pageno'];
+          } else {
+            $pageno = 1;
+          }
+          $numOfrecs = 6;
+          $offset = ($pageno - 1) * $numOfrecs;
+          $stmt = $pdo -> prepare("SELECT * FROM posts ORDER BY id DESC");
+          $stmt -> execute();
+          $rawResult = $stmt -> fetchAll();
+          $total_pages = ceil(count($rawResult) / $numOfrecs);
+>>>>>>> 0c30c30db8d3326e452cb613a9b1ccc5986c093b
 
             $stmt = $pdo -> prepare("SELECT * FROM posts ORDER BY id DESC LIMIT $offset,$numOfrecs");
             $stmt -> execute();

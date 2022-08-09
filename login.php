@@ -22,7 +22,7 @@ if($_POST) {
       header('Location:index.php');
     }
   } else {
-    echo "<script>alert('Incorrect credentials')</script>";
+    echo "<script>alert('Incorrect Login!')</script>";
   }
 }
 
