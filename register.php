@@ -3,6 +3,23 @@ session_start();
 require 'config/config.php';
 
 if($_POST) {
+
+  if(empty($_POST["name"]) || empty($_POST["email"]) || empty($_POST["password"]) || strlen($_POST['password']) < 4) {
+    if(empty($_POST["name"])) {
+      $nameError = 'name cannot be empty';
+    }
+    if(empty($_POST["email"])) {
+      $emailError = "email cannot be empty";
+    }
+
+    if(empty($_POST["password"])) {
+      $passwordError = "password cannot be empty";
+    }
+    
+    if(strlen($_POST['password']) < 4){
+      $passwordError = "Password should be 4 characters at least";
+    } 
+  } else {
     $name = $_POST["name"];
     $email = $_POST["email"];
     $password = $_POST["password"];
@@ -22,10 +39,11 @@ if($_POST) {
         $result = $stmt -> execute(
             array(":name" => $name, ":email" => $email, ":password" => $password, ":role" => 0)
         );
-        if ($result) {
-            echo "<script>alert('Successfully Register, Please login');window.location.href='login.php'</script>";
-        }
+      if ($result) {
+          echo "<script>alert('Successfully Register, Please login');window.location.href='login.php'</script>";
+      }
     }
+  }
 }
 
 ?>
@@ -56,7 +74,8 @@ if($_POST) {
       <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
         <form action="" method="post">
-          <div class="input-group mb-3">
+          <p><span class="text-danger"><?php echo empty($nameError) ? '': "*".$nameError; ?></span></p>
+          <div class="input-group mb-4">
             <input type="text" name="name" class="form-control" placeholder="name">
             <div class="input-group-append">
               <div class="input-group-text">
@@ -64,7 +83,8 @@ if($_POST) {
               </div>
             </div>
           </div>
-          <div class="input-group mb-3">
+          <p><span class="text-danger"><?php echo empty($emailError) ? '': "*".$emailError; ?></span></p>
+          <div class="input-group mb-4">
             <input type="email" name="email" class="form-control" placeholder="Email">
             <div class="input-group-append">
               <div class="input-group-text">
@@ -72,7 +92,8 @@ if($_POST) {
               </div>
             </div>
           </div>
-          <div class="input-group mb-3">
+          <p><span class="text-danger"><?php echo empty($passwordError) ? '': "*".$passwordError; ?></span></p>
+          <div class="input-group mb-4">
             <input type="password" name="password" class="form-control" placeholder="Password">
             <div class="input-group-append">
               <div class="input-group-text">

@@ -10,6 +10,18 @@
       header("Location:login.php");
     }
     if($_POST) {
+
+      if(empty($_POST["name"]) || empty($_POST["email"])) {
+        if(empty($_POST["name"])) {
+          $nameError = 'name cannot be empty';
+        }
+        if(empty($_POST["email"])) {
+          $emailError = "email cannot be empty";
+        }
+      } elseif (!empty($_POST["password"]) && strlen($_POST['password']) < 4) {
+        $passwordError = "Password should be 4 characters at least";
+
+      } else {
         $id = $_POST["id"];
         $name = $_POST["name"];
         $email = $_POST["email"];
@@ -21,79 +33,54 @@
         }
 
         $stmt = $pdo -> prepare("SELECT * FROM users WHERE email = :email AND id != :id");
-
         $stmt -> execute(array(":email"=> $email, ':id' => $id));
         $user = $stmt -> fetch(PDO::FETCH_ASSOC);
         
         if($user){
-
             echo "<script>alert('Email duplicated')</script>";
-            
         } else {
           $stmt = $pdo -> prepare("UPDATE users SET name='$name', email='$email', role='$role' WHERE id='$id'");
           $result = $stmt -> execute();
           if($result) {
               echo "<script>alert('Successfully Updated.');window.location.href='users.php';</script>";
           }
-        }
-        
-      }
+        } 
+      } 
+    }
 
       $stmt = $pdo -> prepare("SELECT * FROM users WHERE id=".$_GET['id']);
       $stmt -> execute();
-
       $result = $stmt -> fetchAll();
-
 ?>
 
 
 <?php include "header.php"; ?>
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <!-- /.card-header -->
-              <div class="card-body">
-<<<<<<< HEAD
-                  <form action="" method="post" enctype="multipart/form-data">
-                      <div class="form-group">
-                          <input type="hidden" name="id" value="<?php echo $result[0]['id']; ?>">
-                          <label for="name">name</label>
-                          <input type="text" name="name" id="name" class="form-control" value="<?php echo $result[0]["name"]; ?>">
-                      </div>
-
-                      <div class="form-group">
-                          <label for="email">email</label>
-                          <input type="email" name="email" id="email" class="form-control" value="<?php echo $result[0]['email']; ?>">
-                      </div>
-
-                      <div class="form-group form-check">
-                          <input type="checkbox" name="role" class="form-check-input" id="role" value="1" <?php echo $result[0]["role"] ? "checked" : ""; ?>>
-                          <label for="role">Permission for admin</label>
-                      </div>
-
-                      <div class="form-group">
-                          <input type="submit" class="btn btn-success" name="" value="Submit">
-                          <a href="users.php" class="btn btn-warning">Back</a>
-                      </div>
-                  </form>
-=======
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
                   <div class="form-group">
                       <input type="hidden" name="id" value="<?php echo $result[0]['id']; ?>">
-                      <label for="name">name</label>
+                      <label for="name">name</label><span class="text-danger ml-3"><?php echo empty($nameError) ? '': "*".$nameError; ?></span>
                       <input type="text" name="name" id="name" class="form-control" value="<?php echo $result[0]["name"]; ?>">
                   </div>
 
                   <div class="form-group">
-                      <label for="email">email</label>
+                      <label for="email">email</label><span class="text-danger ml-3"><?php echo empty($emailError) ? '': "*".$emailError; ?></span>
                       <input type="email" name="email" id="email" class="form-control" value="<?php echo $result[0]['email']; ?>">
                   </div>
 
+                  <div class="form-group">
+                    <label for="password">password</label><span class="text-danger ml-3"><?php echo empty($passwordError) ? '': "*".$passwordError; ?></span>
+                    <div class="mt-1">The user already has a password</div>
+                    <input type="password" name="password" class="form-control">
+                  </div>
+
                   <div class="form-group form-check">
-                      <input type="checkbox" name="role" class="form-check-input" id="role" value="1">
+                      <input type="checkbox" name="role" class="form-check-input" id="role" value="1" <?php echo $result[0]["role"] ? "checked" : ""; ?>>
                       <label for="role">Permission for admin</label>
                   </div>
 
@@ -102,29 +89,20 @@
                       <a href="users.php" class="btn btn-warning">Back</a>
                   </div>
                 </form>
->>>>>>> 0c30c30db8d3326e452cb613a9b1ccc5986c093b
-                
-              </div>
             </div>
-            <!-- /.card -->
           </div>
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div>
     </div>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+</div>
 
-  <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
     <div class="p-3">
       <h5>Title</h5>
       <p>Sidebar content</p>
     </div>
   </aside>
-  <!-- /.control-sidebar -->
 <?php
 include "footer.php";
 ?>
