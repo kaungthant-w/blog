@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'config/config.php';
+require("../config/common.php");
 
 if($_POST) {
 
@@ -74,6 +75,7 @@ if($_POST) {
       <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
         <form action="" method="post">
+        <input name="_token" type="hidden" value="<?php echo $_SESSION['_token']; ?>">
           <p><span class="text-danger"><?php echo empty($nameError) ? '': "*".$nameError; ?></span></p>
           <div class="input-group mb-4">
             <input type="text" name="name" class="form-control" placeholder="name">

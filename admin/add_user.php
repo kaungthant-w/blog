@@ -1,6 +1,7 @@
 <?php
 session_start();
 require("../config/config.php");
+require("../config/common.php");
 
 if(empty($_SESSION["user_id"]) && empty($_SESSION['logged_in'])) {
   header("Location:login.php");
@@ -75,7 +76,7 @@ if($_POST) {
           </div>
           <div class="card-body w-50 mx-auto">
             <form action="" method="post" enctype="multipart/form-data">
-
+            <input name="_token" type="hidden" value="<?php echo $_SESSION['_token']; ?>">
               <div class="form-group">
                 <label for="name">Username</label><span class="text-danger ml-3"><?php echo empty($nameError) ? '': "*".$nameError; ?></span>
                 <input type="text" name="name" class="form-control">
