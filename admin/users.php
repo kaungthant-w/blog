@@ -1,6 +1,7 @@
 <?php
   session_start();
   require("../config/config.php");
+  require("../config/common.php");
 
 if(empty($_SESSION["user_id"]) && empty($_SESSION['logged_in'])) {
   header("Location:login.php");
@@ -95,9 +96,9 @@ if(isset($_POST["search"])) {
               ?>
               <tr>
                 <td><?php echo $i; ?></td>
-                <td><?php echo $value["name"]; ?></td>
+                <td><?php echo escape($value["name"]); ?></td>
                 <td>
-                <?php echo substr($value["email"],0,50); ?>
+                <?php echo escape(substr($value["email"],0,50)); ?>
                 </td>
                 <td><?php echo $value["role"]; ?></td>
                 <td>

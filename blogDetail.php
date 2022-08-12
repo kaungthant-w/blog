@@ -79,12 +79,12 @@ if($_POST) {
       <div class="col-md-12">
         <div class="card">
           <div class="card-header text-center">
-            <h4><?php echo $result[0]["title"]; ?></h4>
+            <h4><?php echo escape($result[0]["title"]); ?></h4>
           </div>
           <div class="card-body">
             <!-- <img class="img-thumbnail w-100 mb-4" src="dist/img/photo2.png" alt="Photo"> -->
             <img class="img-thumbnail w-100 h-50 d-block m-auto" style="height: 400px;" src="admin/images/<?php echo $result[0]['image']; ?>" alt="blog">
-            <?php echo $result[0]["content"]; ?>
+            <?php echo escape($result[0]["content"]); ?>
           </div>
 
           <h3 class="ml-4">Comments</h3><hr>
@@ -97,10 +97,10 @@ if($_POST) {
                 <div class="">
                   <?php foreach($cmResult as $key => $value){ ?>
                     <span class="username">
-                      <?php echo $auResult[0][0]["name"]; ?>
-                      <span class="text-muted float-right"><?php $value['created_at']; ?></span>
+                      <?php echo escape($auResult[0][0]["name"]); ?>
+                      <span class="text-muted float-right"><?php escape($value['created_at']); ?></span>
                     </span>
-                    <?php echo $value['content']; ?>
+                    <?php echo escape($value['content']); ?>
 
                     <?php
                     }

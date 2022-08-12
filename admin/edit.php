@@ -70,12 +70,12 @@ $result = $stmt -> fetchAll();
                 <div class="form-group">
                   <input type="hidden" name="id" value="<?php echo $result[0]['id']; ?>">
                   <label for="title">Title</label> <span class="text-danger ml-3"><?php echo empty($titleError) ? '': "*".$titleError; ?></span>
-                  <input type="text" name="title" id="title" class="form-control" value="<?php echo $result[0]["title"]; ?>">
+                  <input type="text" name="title" id="title" class="form-control" value="<?php echo escape($result[0]["title"]); ?>">
                 </div>
 
                 <div class="form-group">
                   <label for="content">Content</label><span class="text-danger ml-3"><?php echo empty($contentError) ? '': "*".$contentError; ?></span>
-                  <textarea name="content" class="form-control" id="content" cols="10" rows="10"><?php echo $result[0]["content"]; ?></textarea>
+                  <textarea name="content" class="form-control" id="content" cols="10" rows="10"><?php echo escape($result[0]["content"]); ?></textarea>
                 </div>
 
                 <div class="form-group mb-3">

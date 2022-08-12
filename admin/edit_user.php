@@ -68,12 +68,12 @@
                   <div class="form-group">
                       <input type="hidden" name="id" value="<?php echo $result[0]['id']; ?>">
                       <label for="name">name</label><span class="text-danger ml-3"><?php echo empty($nameError) ? '': "*".$nameError; ?></span>
-                      <input type="text" name="name" id="name" class="form-control" value="<?php echo $result[0]["name"]; ?>">
+                      <input type="text" name="name" id="name" class="form-control" value="<?php echo escape($result[0]["name"]); ?>">
                   </div>
 
                   <div class="form-group">
                       <label for="email">email</label><span class="text-danger ml-3"><?php echo empty($emailError) ? '': "*".$emailError; ?></span>
-                      <input type="email" name="email" id="email" class="form-control" value="<?php echo $result[0]['email']; ?>">
+                      <input type="email" name="email" id="email" class="form-control" value="<?php echo escape($result[0]['email']); ?>">
                   </div>
 
                   <div class="form-group">
